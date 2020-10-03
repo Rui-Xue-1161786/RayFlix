@@ -8,15 +8,15 @@ from domainmodel.director import Director
 
 class MovieFileCSVReader:
 
-    def __init__(self, file_name: str):
-        self.__file_name = file_name
+    def __init__(self, file_path: str):
+        self.__file_path = file_path
         self.__dataset_of_movies = []
         self.__dataset_of_actors = set()
         self.__dataset_of_directors = set()
         self.__dataset_of_genres = set()
 
     def read_csv_file(self):
-        with open(self.__file_name, mode='r', encoding='utf-8-sig') as csvfile:
+        with open(self.__file_path, mode='r', encoding='utf-8-sig') as csvfile:
             movie_file_reader = csv.DictReader(csvfile)
 
             for row in movie_file_reader:

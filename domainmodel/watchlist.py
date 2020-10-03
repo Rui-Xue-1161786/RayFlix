@@ -49,12 +49,12 @@ class WatchList:
         return self._watch_list[self._index - 1]
 
 
-watchlist = WatchList()
-movie1 = Movie("Moana", 2016)
-watchlist.add_movie(movie1)
-watchlist.add_movie(Movie("Ice Age", 2909))
-watchlist.add_movie(Movie("Guardians of the Galaxy", 2012))
-a = iter(watchlist)
-print(a.__next__())
-print(a.__next__())
-print(a.__next__())
+# watchlist = WatchList()
+# movie1 = Movie("Moana", 2016)
+# watchlist.add_movie(movie1)
+# watchlist.add_movie(Movie("Ice Age", 2909))
+# watchlist.add_movie(Movie("Guardians of the Galaxy", 2012))
+# a = iter(watchlist)
+# print(a.__next__())
+# print(a.__next__())
+# print(a.__next__())
