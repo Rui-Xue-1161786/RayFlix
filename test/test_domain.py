@@ -1,11 +1,6 @@
 import pytest
 
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.movie import Movie
-from domainmodel.review import Review
-from domainmodel.user import User
-from domainmodel.watchlist import WatchList
+from domainmodel.model import Movie, Genre, User, Review,Actor, WatchList, Director
 
 
 @pytest.fixture()

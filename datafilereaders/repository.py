@@ -1,13 +1,9 @@
 import abc
 from typing import List
 
-from domainmodel.actor import Actor
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.movie import Movie
-from domainmodel.review import Review
-from domainmodel.user import User
-from domainmodel.watchlist import WatchList
+from domainmodel.model import Movie, Genre, User, Review,Actor, WatchList, Director
+
+repo_instance = None
 
 
 class RepositoryException(Exception):
@@ -75,4 +71,13 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def get_movie(self, movie: str) -> Movie:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_number_of_movies(self):
+        """ Returns the number of movies in the repository. """
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_all_movie(self):
         raise NotImplementedError

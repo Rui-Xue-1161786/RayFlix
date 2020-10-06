@@ -1,9 +1,4 @@
-from domainmodel.actor import Actor
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.movie import Movie
-from domainmodel.review import Review
-from domainmodel.user import User
+from domainmodel.model import Movie, Genre, User, Review,Actor, WatchList, Director
 from datafilereaders.movie_file_csv_reader import MovieFileCSVReader
 from datafilereaders.repository import AbstractRepository
 from typing import List
@@ -20,6 +15,9 @@ class MemoryRepository(AbstractRepository):
         self._movie = movie_file_reader.dataset_of_movies
         self._user = list()
         self._review = list()
+
+    def get_all_movie(self):
+        return self._movie
 
     def add_user(self, user: User):
         self._user.append(user)
@@ -61,11 +59,18 @@ class MemoryRepository(AbstractRepository):
     def get_movie(self, title: str, release_year: int) -> Movie:
         return next((the_movie for the_movie in self._movie if the_movie.title == title and the_movie.release_year == release_year), None)
 
-# filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
-# repo = MemoryRepository(filename)
-# print(len(repo.get_genre()))
-#
-# print(next((the_genre for the_genre in repo.get_genre() if the_genre == Genre('Rayyy')), None))
+    def get_number_of_movies(self):
+        return len(self._movie)
+
+
+filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
+repo = MemoryRepository(filename)
+
+# all_movie = repo.get_all_movie()
+# family_list = []
+# tag_family = Genre('Family')
+# print(tag_family)
+
 
 
 

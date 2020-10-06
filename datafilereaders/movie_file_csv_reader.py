@@ -21,6 +21,7 @@ class MovieFileCSVReader:
 
             for row in movie_file_reader:
                 movie = Movie(row['Title'], int(row['Year']))
+                movie.id = int(row['Year'])
                 movie.description = row['Description']
                 movie.runtime_minutes = int(row['Runtime (Minutes)'])
 
@@ -55,5 +56,5 @@ class MovieFileCSVReader:
         return self.__dataset_of_directors
 
     @property
-    def dataset_of_genres(self) -> set:
+    def dataset_of_genres(self) :
         return self.__dataset_of_genres

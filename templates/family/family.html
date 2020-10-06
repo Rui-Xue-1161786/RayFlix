@@ -1,0 +1,22 @@
+{% extends 'layout.html' %} {% block content %}
+<!--<main id="main">-->
+  <p>
+    The number of movies are {{number}}
+  </p>
+
+  <br />
+<p>{{family_list}} </p>
+  <p>
+    {%for family in family_list %}
+    <p>{{family}} </p>
+
+    {%endfor%}
+  </p>
+  <br />
+
+
+  <p style="text-align: right; font-style: italic;">
+    Wikipedia
+  </p>
+<!--</main>-->
+{% endblock %}

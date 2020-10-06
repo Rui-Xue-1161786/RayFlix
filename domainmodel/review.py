@@ -14,6 +14,7 @@ class Review:
             self.__review_text = review_text
         else:
             self.__review_text = None
+
         if type(rating) is int and rating >= 1 and rating <= 10:
             self.__rating = rating
         else:

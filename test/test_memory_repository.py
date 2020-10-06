@@ -1,12 +1,7 @@
 import pytest
 
 from datafilereaders.memory_repository import MemoryRepository
-from domainmodel.actor import Actor
-from domainmodel.director import Director
-from domainmodel.genre import Genre
-from domainmodel.movie import Movie
-from domainmodel.review import Review
-from domainmodel.user import User
+from domainmodel.model import Movie, Genre, User, Review,Actor, WatchList, Director
 
 
 @pytest.fixture
@@ -25,7 +20,7 @@ def test_repository_for_user(in_memory_repo):
 
 
 def test_repository_for_directer(in_memory_repo):
-    assert in_memory_repo.get_director('James Gunn') == Director('James Gunn')
+    assert in_memory_repo.get_director('James Gunn').__repr__() == Director('James Gunn').__repr__()
     director = Director('Ray')
     in_memory_repo.add_director(director)
     assert in_memory_repo.get_director('Ray') == director
@@ -35,11 +30,11 @@ def test_repository_for_movie(in_memory_repo):
     movie = Movie('The story of Ray',2020)
     in_memory_repo.add_movie(movie)
     assert in_memory_repo.get_movie('The story of Ray',2020) == movie
-    assert in_memory_repo.get_movie('La La Land',2016) == Movie('La La Land',2016)
+    assert in_memory_repo.get_movie('La La Land',2016).__repr__() == Movie('La La Land',2016).__repr__()
 
 
 def test_repository_for_actor(in_memory_repo):
-    assert in_memory_repo.get_actor('Ryan Gosling') == Actor('Ryan Gosling')
+    assert in_memory_repo.get_actor('Ryan Gosling').__repr__() == Actor('Ryan Gosling').__repr__()
     actor = Actor('Ray')
     in_memory_repo.add_actor(actor)
     assert in_memory_repo.get_actor('Ray') == actor

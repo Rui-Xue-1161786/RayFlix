@@ -1,0 +1,34 @@
+{% extends 'layout.html' %} {% block content %}
+<!--<main id="main">-->
+  <p>
+    The number of movies are {{number}}
+  </p>
+
+  <br />
+  <p>
+
+    {%for genre in genre_list %}
+    <p>{{genre}} </p>
+    {%endfor%}
+  </p>
+  <br />
+
+  <p>
+    The pandemic has caused global social and economic disruption,including the
+    largest global recession since the Great Depression and global famines
+    affecting 265 million people. It has led to the postponement or cancellation
+    of sporting, religious, political, and cultural events, widespread supply
+    shortages exacerbated by panic buying, and decreased emissions of pollutants
+    and greenhouse gases. Schools, universities, and colleges have been closed
+    either on a nationwide or local basis in 172 countries, affecting
+    approximately 98.5 percent of the world's student population. Misinformation
+    about the virus has circulated through social media and mass media. There
+    have been incidents of xenophobia and discrimination against Chinese people
+    and against those perceived as being Chinese or as being from areas with
+    high infection rates.
+  </p>
+  <p style="text-align: right; font-style: italic;">
+    Wikipedia
+  </p>
+<!--</main>-->
+{% endblock %}

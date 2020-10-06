@@ -21,7 +21,7 @@ class Movie:
 
         self.__set_title_internal(title)
         self.__set_release_year_internal(release_year)
-
+        self.__image_url = None
         self.__description = None
         self.__director = None
         self.__actors = []
@@ -29,6 +29,14 @@ class Movie:
         self.__runtime_minutes = None
 
     # essential attributes
+
+    @property
+    def image_url(self) -> str:
+        return self.__image_url
+
+    @image_url.setter
+    def image_url(self, url: str):
+        self.__image_url = url
 
     @property
     def title(self) -> str:
@@ -139,3 +147,4 @@ class Movie:
 
     def __hash__(self):
         return hash(self.__get_unique_string_rep())
+
