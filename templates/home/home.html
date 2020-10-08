@@ -1,4 +1,4 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'nav_bar.html' %} {% block content %}
 <!--<main id="main">-->
   <p>
     The number of movies are {{number}}
@@ -6,7 +6,6 @@
 
   <br />
   <p>
-
     {%for genre in genre_list %}
     <p>{{genre}} </p>
     {%endfor%}
