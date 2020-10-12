@@ -1,9 +1,6 @@
 import csv
 
-from domainmodel.movie import Movie
-from domainmodel.actor import Actor
-from domainmodel.genre import Genre
-from domainmodel.director import Director
+from domainmodel.model import Movie, Genre, User, Review, Actor, WatchList, Director
 
 
 class MovieFileCSVReader:
@@ -21,7 +18,7 @@ class MovieFileCSVReader:
 
             for row in movie_file_reader:
                 movie = Movie(row['Title'], int(row['Year']))
-                movie.id = int(row['Year'])
+                movie.id = int(row['Rank'])
                 movie.description = row['Description']
                 movie.runtime_minutes = int(row['Runtime (Minutes)'])
 
@@ -32,6 +29,7 @@ class MovieFileCSVReader:
                 parsed_genres = row['Genre'].split(',')
                 for genre_string in parsed_genres:
                     genre = Genre(genre_string)
+                    genre.add_movie(movie)
                     self.__dataset_of_genres.add(genre)
                     movie.add_genre(genre)
 

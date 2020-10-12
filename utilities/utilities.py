@@ -17,9 +17,22 @@ def get_genres_and_urls():
     return genres_urls
 
 
-def get_selected_movies(quantity=3):
-    movies = services.get_random_movies(quantity, repo.repo_instance)
+@utilities_blueprint.route('/video', methods=['GET'])
+def video():
+    # number_of_movie = repo.repo_instance.get_number_of_movies()
+    # genre_list = repo.repo_instance.get_genre()
 
-    for movie in movies:
-        movie['hyperlink'] = url_for('watching_bp.movies_by_year', year=movie['release_year'].isoformat())
-    return movies
+    return render_template(
+        'video/video.html'
+        # number=number_of_movie,
+        # genre_list = genre_list
+
+    )
+
+
+# def get_selected_movies(quantity=3):
+#     movies = services.get_random_movies(quantity, repo.repo_instance)
+#
+#     for movie in movies:
+#         movie['hyperlink'] = url_for('watching_bp.movies_by_year', year=movie['release_year'].isoformat())
+#     return movies

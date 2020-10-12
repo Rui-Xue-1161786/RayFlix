@@ -1,27 +1,47 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<style>
-.center {
-  color: WHITE;
-  margin: auto;
-  width: 30%;
-  padding: 10px;
-}
-</style>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+<!--<style>-->
+<!--.center {-->
+<!--  color: WHITE;-->
+<!--  margin: auto;-->
+<!--  width: 30%;-->
+<!--  padding: 10px;-->
+<!--}-->
+<!--</style>-->
+
     <title>Title</title>
 
-<!--    <link-->
-<!--      rel="stylesheet"-->
-<!--      href="{{ url_for('static', filename='css/main.css') }}"-->
-<!--    />-->
+
+
+
+
+
+
+
+
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+
+
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 
 </head>
 
-<body>
+
 
 
 
@@ -45,24 +65,35 @@
         <a class="nav-link" href="{{ url_for('authentication_bp.logout') }}">Logout</a>
       </li>
 
-
-
     </ul>
-<div class="center">
-    <h1>
-      CS235Flix
-    </h1>
 
-</div>
 
-<div class="card">
+      <div class="card">
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+     </div>
 </nav>
+
+
+<body>
+
+
+<!--<div class="container movie-details">-->
+<!--  <div class = "row">-->
+<!--    <div class="col-md-6 left-box">-->
+<!--      <h1>-->
+<!--      ROBOTs 2.0-->
+<!--      </h1>-->
+<!--    </div>-->
+<!--    <div class="col-md-6"></div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
 {% block content %} {% endblock %}
 
 

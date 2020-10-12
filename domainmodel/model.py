@@ -75,9 +75,18 @@ class Genre:
         else:
             self.__genre_name = genre_name.strip()
 
+        self._tagged_movies = list()
+
+    @property
+    def tagged_movies(self):
+        return self._tagged_movies
+
     @property
     def genre_name(self) -> str:
         return self.__genre_name
+
+    def add_movie(self, movie):
+        self._tagged_movies.append(movie)
 
     def __repr__(self):
         return f'<Genre {self.__genre_name}>'
@@ -123,7 +132,7 @@ class Movie:
 
     @property
     def id(self) -> int:
-        return self._id
+        return self.__id
 
     @property
     def review(self):
@@ -144,6 +153,10 @@ class Movie:
     @title.setter
     def title(self, title: str):
         self.__set_title_internal(title)
+
+    @id.setter
+    def id(self, id: str):
+        self.__id = id
 
     @property
     def release_year(self) -> int:

@@ -24,4 +24,10 @@ def create_app():
         from authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
 
+        from watching import watching
+        app.register_blueprint(watching.watching_blueprint)
+
+        # from .utilities import utilities
+        # app.register_blueprint(utilities.utilities_blueprint)
+
     return app

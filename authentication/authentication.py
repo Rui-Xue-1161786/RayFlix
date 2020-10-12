@@ -52,6 +52,10 @@ def login():
     username_not_recognised = None
     password_does_not_match_username = None
 
+    if "username" in session:
+        flash("Already Logged In, Please Logout First!")
+        return redirect(url_for('home_bp.home'))
+
     if form.validate_on_submit():
         # Successful POST, i.e. the username and password have passed validation checking.
         # Use the service layer to lookup the user.
@@ -60,6 +64,8 @@ def login():
 
             # Authenticate user.
             services.authenticate_user(user['username'], form.password.data, repo.repo_instance)
+
+
 
             # Initialise session and redirect the user to the home page.
             session.clear()

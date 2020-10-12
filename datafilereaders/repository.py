@@ -1,7 +1,7 @@
 import abc
 from typing import List
 
-from domainmodel.model import Movie, Genre, User, Review,Actor, WatchList, Director
+from domainmodel.model import Movie, Genre, User, Review, Actor, WatchList, Director
 
 repo_instance = None
 
@@ -80,4 +80,8 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def get_all_movie(self):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_movie_by_id(self, id: int):
         raise NotImplementedError

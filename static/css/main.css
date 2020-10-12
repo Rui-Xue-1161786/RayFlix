@@ -1,3 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  color: black;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+
+}
+
+body,
+html {
+  height: 100%;
+}
+
+
+
+
+
+
+
+.btn-nav {
+  padding: 10px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #bdb8d7;
+  display: block;
+}
+
+.btn-nav:hover {
+  background-color: #594f8d;
+  color: #fff;
+}
+
+.btn-general {
+    background-color: #7532cd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    float:left;
+}
+
+.btn-general-disabled {
+    background-color: #4b4276;
+    border: none;
+    border-radius: 8px;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    float:left;
+    #opacity: 0.6;
+}
+
+.btn-general:hover {
+    background-color: #8acd32;
+    color: black;
+}
+
+.textarea {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all;
+}
+
+
+
+#header {
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #e0e4e8;
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+
+
+
+
+#nav-header {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 12px;
+}
+
+#sub-nav-header {
+  color: #fff;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+#nav-footer {
+  color: #fff;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  position: absolute;
+  bottom: 0;
+  font-size: small;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+
+
+#logo {
+  width: 150px;
+}
+
+#sidebar {
+    background-color: #8acd32;
+    color: #717171;
+    width: 33.333333%;
+    min-height: 100vh;
+    height: 100%;
+    padding: 20px;
+    border-bottom: 1px solid #e0e4e8;
+}
+
+#article-header {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#article {
+    clear:both;
+    margin-bottom:100px;
+}
+
+#article-footer {
+    font-size: 32px;
+}
 
 
 
@@ -39,11 +182,25 @@ input[type='submit']:hover {
     color: black;
 }
 
-.make_title_cool {
-
-  color: WHITE;
-  width: 50%;
-  padding: 10px;
+.icon {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: -0.5em;
+    fill: currentColor;
+    overflow: hidden;
 }
 
+.video{
+    height: 70% ;
+    border:0;
+    margin:auto;
+    padding:0;
 
+    display: block
+
+  width: 90%;
+  position: absolute;
+  top: 11%;
+  left: 22%;
+
+}
