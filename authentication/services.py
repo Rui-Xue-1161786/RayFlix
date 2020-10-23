@@ -1,8 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from datafilereaders.memory_repository import MemoryRepository
 from datafilereaders.repository import AbstractRepository
-from domainmodel.user import User
+from domainmodel.model import User
 
 
 class NameNotUniqueException(Exception):
@@ -55,7 +54,7 @@ def authenticate_user(username: str, password: str, repo: AbstractRepository):
 
 def user_to_dict(user: User):
     user_dict = {
-        'username': user.user_name,
+        'username': user.username,
         'password': user.password
     }
     return user_dict

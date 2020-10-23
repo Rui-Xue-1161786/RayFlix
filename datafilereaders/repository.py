@@ -85,3 +85,19 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def get_movie_by_id(self, id: int):
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_movie_ids_for_genre(self, genre_name: str):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_movie_list_by_id_list(self, id_list):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_movie_by_name(self, title: str):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_director_list(self):
+        raise NotImplementedError

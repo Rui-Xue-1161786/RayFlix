@@ -204,3 +204,13 @@ input[type='submit']:hover {
   left: 22%;
 
 }
+
+.title_center {
+  color: WHITE;
+  margin: 0;
+  width: 30%;
+  padding: 1px;
+  position: absolute;
+  top: 0%;
+  left: 40%;
+}

@@ -1,20 +1,32 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 import datafilereaders.repository as repo
-# import covid.utilities.utilities as utilities
+from authentication.authentication import SearchForm
+
 
 
 home_blueprint = Blueprint(
     'home_bp', __name__)
 
 
-@home_blueprint.route('/', methods=['GET'])
+@home_blueprint.route('/', methods=['GET','POST'])
 def home():
-    number_of_movie = repo.repo_instance.get_number_of_movies()
+    form = SearchForm()
+    if form.is_submitted():
+        movie_name = request.form['search_information']
+        # try:
+        #     repo.get_movie()
+        return render_template(
+            'family/family.html',
+            movie_name=movie_name
+        )
+
+    # number_of_movie = repo.repo_instance.get_number_of_movies()
     genre_list = repo.repo_instance.get_genre()
 
     return render_template(
         'home/home.html',
-        number=number_of_movie,
+        form=form,
+        # number=number_of_movie,
         genre_list = genre_list
 
     )

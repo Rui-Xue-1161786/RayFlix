@@ -8,7 +8,6 @@ from password_validator import PasswordValidator
 
 from functools import wraps
 
-import utilities.utilities as utilities
 import authentication.services as services
 import datafilereaders.repository as repo
 
@@ -65,8 +64,6 @@ def login():
             # Authenticate user.
             services.authenticate_user(user['username'], form.password.data, repo.repo_instance)
 
-
-
             # Initialise session and redirect the user to the home page.
             session.clear()
             session['username'] = user['username']
@@ -105,6 +102,7 @@ def login_required(view):
         if 'username' not in session:
             return redirect(url_for('authentication_bp.login'))
         return view(**kwargs)
+
     return wrapped_view
 
 
@@ -141,3 +139,9 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', [
         DataRequired()])
     submit = SubmitField('Login')
+
+
+class SearchForm(FlaskForm):
+    search_information = StringField('search_information',
+                                     validators=[DataRequired(), Length(min=2, max=15)])
+    submit = SubmitField('Search')

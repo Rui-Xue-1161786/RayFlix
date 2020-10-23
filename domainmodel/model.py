@@ -1,7 +1,6 @@
 from datetime import datetime
-from typing import List, Iterable
 
-from domainmodel.review import Review
+from domainmodel.classes_in_model.review import Review
 
 
 class Actor:
@@ -70,23 +69,24 @@ class Director:
 class Genre:
 
     def __init__(self, genre_name : str):
+        self.__genre_name = None
         if genre_name == "" or type(genre_name) is not str:
             self.__genre_name = None
         else:
             self.__genre_name = genre_name.strip()
 
-        self._tagged_movies = list()
+        self.__tagged_movies = list()
 
     @property
     def tagged_movies(self):
-        return self._tagged_movies
+        return self.__tagged_movies
 
     @property
     def genre_name(self) -> str:
         return self.__genre_name
 
     def add_movie(self, movie):
-        self._tagged_movies.append(movie)
+        self.__tagged_movies.append(movie)
 
     def __repr__(self):
         return f'<Genre {self.__genre_name}>'
@@ -105,22 +105,19 @@ class Genre:
 
 class Movie:
 
-    def __set_title_internal(self, title: str):
+    def __init__(self, title: str, release_year: int):
+        self.__release_year = None
+        self.__title = None
+
+        if release_year >= 1900 and type(release_year) is int:
+            self.__release_year = release_year
+
         if title.strip() == "" or type(title) is not str:
             self.__title = None
         else:
             self.__title = title.strip()
 
-    def __set_release_year_internal(self, release_year: int):
-        if release_year >= 1900 and type(release_year) is int:
-            self.__release_year = release_year
-        else:
-            self.__release_year = None
-
-    def __init__(self, title: str, release_year: int):
         self.__id: int = id
-        self.__set_title_internal(title)
-        self.__set_release_year_internal(release_year)
         self.__image_url = None
         self.__description = None
         self.__director = None
@@ -152,7 +149,7 @@ class Movie:
 
     @title.setter
     def title(self, title: str):
-        self.__set_title_internal(title)
+        self.__title
 
     @id.setter
     def id(self, id: str):
@@ -164,7 +161,7 @@ class Movie:
 
     @release_year.setter
     def release_year(self, release_year: int):
-        self.__set_release_year_internal(release_year)
+        self.__release_year = release_year
 
     # additional attributes
 
@@ -309,11 +306,13 @@ class Review:
 
 class User:
 
-    def __init__(self, user_name: str, password: str):
-        if user_name == "" or type(user_name) is not str:
-            self.__user_name = None
+    def __init__(self, username: str, password: str):
+        self.__username = None
+        self.__password = None
+        if username == "" or type(username) is not str:
+            self.__username = None
         else:
-            self.__user_name = user_name.strip().lower()
+            self.__username = username.strip().lower()
         if password == "" or type(password) is not str:
             self.__password = None
         else:
@@ -323,8 +322,8 @@ class User:
         self.__time_spent_watching_movies_minutes = 0
 
     @property
-    def user_name(self) -> str:
-        return self.__user_name
+    def username(self) -> str:
+        return self.__username
 
     @property
     def password(self) -> str:
@@ -352,18 +351,18 @@ class User:
             self.__reviews.append(review)
 
     def __repr__(self):
-        return f'<User {self.__user_name}>'
+        return f'<User {self.__username}>'
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):
             return False
-        return other.user_name == self.__user_name
+        return other.username == self.__username
 
     def __lt__(self, other):
-        return self.__user_name < other.user_name
+        return self.__username < other.user_name
 
     def __hash__(self):
-        return hash(self.__user_name)
+        return hash(self.__username)
 
 
 class WatchList:

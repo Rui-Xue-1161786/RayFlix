@@ -8,7 +8,6 @@ from wtforms import TextAreaField, HiddenField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError
 
 import datafilereaders.repository as repo
-import utilities.utilities as utilities
 import watching.services as services
 
 from authentication.authentication import login_required

@@ -23,7 +23,7 @@ class MemoryRepository(AbstractRepository):
         self._user.append(user)
 
     def get_user(self, username) -> User:
-        return next((the_user for the_user in self._user if the_user.user_name == username), None)
+        return next((the_user for the_user in self._user if the_user.username == username), None)
 
     def add_actor(self, actor: Actor):
         self._actor.add(actor)
@@ -67,7 +67,8 @@ class MemoryRepository(AbstractRepository):
         self._movie.append(movie)
 
     def get_movie(self, title: str, release_year: int) -> Movie:
-        return next((the_movie for the_movie in self._movie if the_movie.title == title and the_movie.release_year == release_year), None)
+        return next((the_movie for the_movie in self._movie if
+                     the_movie.title == title and the_movie.release_year == release_year), None)
 
     def get_number_of_movies(self):
         return len(self._movie)
@@ -89,12 +90,33 @@ class MemoryRepository(AbstractRepository):
                 movie_list.append(movie)
         return movie_list
 
+    def get_movie_by_name(self, title: str):
+        return next((the_movie for the_movie in self._movie if
+                     the_movie.title == title), None)
+
 
 
 
 
 filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
 repo = MemoryRepository(filename)
+same_name = []
+for movie in repo.get_all_movie():
+    movie_name = movie.title
+    count = 1
+    for i in repo.get_all_movie():
+        if movie_name == i.title:
+            count += 1
+        if count == 3:
+            if movie_name not in same_name:
+                same_name.append(movie_name)
+print(same_name)
+
+for movie in repo.get_all_movie():
+    if movie.title == 'The Host':
+        print(movie)
+
+
 
 # id_list = repo.get_movie_ids_for_genre("Sci-Fi")
 # print(id_list)
