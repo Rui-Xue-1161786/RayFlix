@@ -212,5 +212,18 @@ input[type='submit']:hover {
   padding: 1px;
   position: absolute;
   top: 0%;
-  left: 40%;
+  left: 45.5%;
+}
+
+.search_right {
+  color: WHITE;
+  margin: 0;
+  width: 40%;
+
+    font-size: 11px;
+  padding: 1px;
+  position: absolute;
+  top: -0.4%;
+  right: -20.2%;
+  font-weight: bold
 }

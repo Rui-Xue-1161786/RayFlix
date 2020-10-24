@@ -101,3 +101,5 @@ class AbstractRepository(abc.ABC):
     @abc.abstractmethod
     def get_director_list(self):
         raise NotImplementedError
+
+

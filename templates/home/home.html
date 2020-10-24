@@ -25,16 +25,16 @@
 
 <!--  </div>-->
 <!--</div>-->
-
+<div class = "search_right">
 <form class="form-inline my-2 my-lg-0" action="" method="post">
     <p>
 <!--        {{form.search_information.label}}<br>-->
-        {{form.search_information}}
+        {{form.search_information(placeholder="Movie names")}}
     </p>
-    <p>{{form.submit}}</p>
+    <p >{{form.submit}}</p>
 
 </form>
-
+</div>
 
 <div class="row row-cols-1 row-cols-md-4">
   <div class="col mb-4">
@@ -108,22 +108,9 @@
   </p>
   <br />
 
-  <p>
-    The pandemic has caused global social and economic disruption,including the
-    largest global recession since the Great Depression and global famines
-    affecting 265 million people. It has led to the postponement or cancellation
-    of sporting, religious, political, and cultural events, widespread supply
-    shortages exacerbated by panic buying, and decreased emissions of pollutants
-    and greenhouse gases. Schools, universities, and colleges have been closed
-    either on a nationwide or local basis in 172 countries, affecting
-    approximately 98.5 percent of the world's student population. Misinformation
-    about the virus has circulated through social media and mass media. There
-    have been incidents of xenophobia and discrimination against Chinese people
-    and against those perceived as being Chinese or as being from areas with
-    high infection rates.
-  </p>
-  <p style="text-align: right; font-style: italic;">
-    Wikipedia
-  </p>
+
+<!--  <p style="text-align: right; font-style: italic;">-->
+<!--    Wikipedia-->
+<!--  </p>-->
 <!--</main>-->
 {% endblock %}

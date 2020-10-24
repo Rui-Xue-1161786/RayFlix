@@ -90,31 +90,41 @@ class MemoryRepository(AbstractRepository):
                 movie_list.append(movie)
         return movie_list
 
-    def get_movie_by_name(self, title: str):
-        return next((the_movie for the_movie in self._movie if
-                     the_movie.title == title), None)
+    def get_movie_by_name(self, title: str) -> [Movie]:
+        movie_list = []
+        for movie in self._movie:
+            if title == movie.title:
+                movie_list.append(movie)
+        return movie_list
+        # return next((the_movie for the_movie in self._movie if
+        #              the_movie.title == title), None)
 
 
 
 
 
-filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
-repo = MemoryRepository(filename)
-same_name = []
-for movie in repo.get_all_movie():
-    movie_name = movie.title
-    count = 1
-    for i in repo.get_all_movie():
-        if movie_name == i.title:
-            count += 1
-        if count == 3:
-            if movie_name not in same_name:
-                same_name.append(movie_name)
-print(same_name)
-
-for movie in repo.get_all_movie():
-    if movie.title == 'The Host':
-        print(movie)
+# filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
+# repo = MemoryRepository(filename)
+#
+# movie = repo.get_movie_by_name("The Host")
+# print(movie)
+#
+#
+# same_name = []
+# for movie in repo.get_all_movie():
+#     movie_name = movie.title
+#     count = 1
+#     for i in repo.get_all_movie():
+#         if movie_name == i.title:
+#             count += 1
+#         if count == 3:
+#             if movie_name not in same_name:
+#                 same_name.append(movie_name)
+# print(same_name)
+#
+# for movie in repo.get_all_movie():
+#     if movie.title == 'The Host':
+#         print(movie)
 
 
 

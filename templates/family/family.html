@@ -1,8 +1,19 @@
-{% extends 'layout.html' %} {% block content %}
+{% extends 'nav_bar.html' %} {% block content %}
 <!--<main id="main">-->
-  <p>
-    {{movie_name}}
-  </p>
+<div class="row row-cols-1 row-cols-md-4">
+{%for movie in movie_list %}
+    <div class="col mb-4">
+    <div class="card h-100">
+      <a href = "{{ url_for('home_bp.video') }}" ><img class="card-img-top" src="{{ url_for('static', filename='image/movie14.jpeg') }}" alt="..."/></a>
+      <div class="card-body">
+        <h5 class="card-title">{{movie.title}} {{movie.release_year}}</h5>
+        <p class="card-text">{{movie.description}}</p>
+      </div>
+    </div>
+    </div>
+{%endfor%}
+ </div>>
+
 
   <br />
 <!--<p>{{family_list}} </p>-->
@@ -15,8 +26,8 @@
 <!--  <br />-->
 
 
-  <p style="text-align: right; font-style: italic;">
-    Wikipedia
-  </p>
+<!--  <p style="text-align: right; font-style: italic;">-->
+<!--    Ray Xue-->
+<!--  </p>-->
 <!--</main>-->
 {% endblock %}
