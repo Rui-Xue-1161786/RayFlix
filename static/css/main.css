@@ -227,3 +227,36 @@ input[type='submit']:hover {
   right: -20.2%;
   font-weight: bold
 }
+
+.rating_right {
+  color: RED;
+  margin: 0;
+  width: 40%;
+
+    font-size: 40px;
+  padding: 1px;
+  position: absolute;
+  top: -0.4%;
+  right: -18.2%;
+  font-weight: bold
+
+}
+
+
+.rating {
+  margin: 0;
+  width: 30%;
+  padding: 1px;
+  position: absolute;
+  top: 82%;
+  left: 35.5%;
+}
+
+.review {
+  margin: 0;
+  width: 30%;
+  padding: 1px;
+  position: absolute;
+  top: 82%;
+  right: 18.5%;
+}

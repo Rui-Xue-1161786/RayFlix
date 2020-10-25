@@ -50,8 +50,8 @@ def create_app():
         from home import home
         app.register_blueprint(home.home_blueprint)
 
-        from family import family
-        app.register_blueprint(family.family_blueprint)
+        # from search import search
+        # app.register_blueprint(search.family_blueprint)
 
         from authentication import authentication
         app.register_blueprint(authentication.authentication_blueprint)
@@ -59,7 +59,7 @@ def create_app():
         from watching import watching
         app.register_blueprint(watching.watching_blueprint)
 
-        # from .utilities import utilities
-        # app.register_blueprint(utilities.utilities_blueprint)
+        from utilities import utilities
+        app.register_blueprint(utilities.utilities_blueprint)
 
     return app

@@ -10,7 +10,7 @@ from functools import wraps
 
 import authentication.services as services
 import datafilereaders.repository as repo
-
+import utilities.utilities as utilities
 # Configure Blueprint.
 authentication_blueprint = Blueprint(
     'authentication_bp', __name__, url_prefix='/authentication')
@@ -40,6 +40,7 @@ def register():
         form=form,
         username_error_message=username_not_unique,
         handler_url=url_for('authentication_bp.register'),
+        tag_urls=utilities.get_tags_and_urls()
         # selected_articles=utilities.get_selected_articles(),
         # tag_urls=utilities.get_tags_and_urls()
     )
@@ -84,6 +85,7 @@ def login():
         username_error_message=username_not_recognised,
         password_error_message=password_does_not_match_username,
         form=form,
+        tag_urls=utilities.get_tags_and_urls()
         # selected_articles=utilities.get_selected_articles(),
         # tag_urls=utilities.get_tags_and_urls()
     )

@@ -1,5 +1,5 @@
 {% extends 'nav_bar.html' %} {% block content %}
-<!--<main id="main">-->
+
 
 
   <p style="color:red">
@@ -12,105 +12,74 @@
         {% endwith %}
 </p>
 
-<!--<div class="container movie-details">-->
-<!--  <div class = "row">-->
-<!--    <div class="col-md-6 left-box">-->
-<!--      <h1>-->
-<!--      <p class="text-primary">-->
-<!--      ssss.text-primary-->
-<!--    </p>-->
-<!--      </h1>-->
-<!--    </div>-->
-<!--    <div class="col-md-6"></div>-->
-
-<!--  </div>-->
-<!--</div>-->
 <div class = "search_right">
 <form class="form-inline my-2 my-lg-0" action="" method="post">
     <p>
-<!--        {{form.search_information.label}}<br>-->
-        {{form.search_information(placeholder="Movie names")}}
+        {{form.search_information(placeholder="Movie, Actor or Director names")}}
     </p>
     <p >{{form.submit}}</p>
 
 </form>
 </div>
 
+
+
 <div class="row row-cols-1 row-cols-md-4">
+     {% for index in range(length_of_movies) %}
   <div class="col mb-4">
     <div class="card h-100">
-      <a href = "{{ url_for('home_bp.video') }}" ><img class="card-img-top" src="{{ url_for('static', filename='image/movie3.jpeg') }}" alt="..."/></a>
+        <a href = "{{ url_for('home_bp.video',movie=the_movie_name_list[index].title) }}" ><img class="card-img-top" src="{{ url_for('static', filename=movie_name_list[index]) }}" alt="..."/></a>
       <div class="card-body">
-        <h5 class="card-title">Click me</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+        <h5 class="card-title">{{the_movie_name_list[index].title}}</h5>
+        <p class="card-text">{{the_movie_name_list[index].description}}</p>
       </div>
     </div>
   </div>
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img class="card-img-top" src="{{ url_for('static', filename='image/movie2.jpeg') }}" alt="..."/>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img class="card-img-top" src="{{ url_for('static', filename='image/movie4.jpeg') }}" alt="..."/>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img class="card-img-top" src="{{ url_for('static', filename='image/movie6.jpeg') }}" alt="..."/>
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col mb-4">
-    <div class="card h-100">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-      </div>
-    </div>
-  </div>
+     {% endfor %}
+
 </div>
 
 
+<!--<div class="row row-cols-1 row-cols-md-4">-->
+<!--  <div class="col mb-4">-->
+<!--    <div class="card h-100">-->
+<!--      <a href = "{{ url_for('home_bp.video',movie=movie.title) }}" ><img class="card-img-top" src="{{ url_for('static', filename=movie_name_list[0]) }}" alt="..."/></a>-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">{{the_movie_name_list[0].title}}</h5>-->
+<!--        <p class="card-text">{{the_movie_name_list[0].description}}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col mb-4">-->
+<!--    <div class="card h-100">-->
+<!--      <img class="card-img-top" src="{{ url_for('static', filename='image/movie2.jpeg') }}" alt="..."/>-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col mb-4">-->
+<!--    <div class="card h-100">-->
+<!--      <img class="card-img-top" src="{{ url_for('static', filename='image/movie4.jpeg') }}" alt="..."/>-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col mb-4">-->
+<!--    <div class="card h-100">-->
+<!--      <img class="card-img-top" src="{{ url_for('static', filename='image/movie6.jpeg') }}" alt="..."/>-->
+<!--      <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
 
 
-<!--  <p>-->
-<!--    The number of movies are {{number}}-->
-<!--  </p>-->
 
-  <br />
-  <p>
-    {%for genre in genre_list %}
-    <p>{{genre}} </p>
-    {%endfor%}
-  </p>
-  <br />
-
-
-<!--  <p style="text-align: right; font-style: italic;">-->
-<!--    Wikipedia-->
-<!--  </p>-->
-<!--</main>-->
 {% endblock %}

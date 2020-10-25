@@ -1,0 +1,29 @@
+{% extends 'nav_bar.html' %} {% block content %}
+
+
+
+<!--<video width="320" height="240" controls>-->
+<video class="video" controls>
+  <source src="{{ url_for('static', filename='video/video1.mp4') }}" type="video/mp4">
+<!--  <source src="movie.ogg" type="video/ogg">-->
+  Your browser does not support the video tag.
+</video>
+
+<div class = 'rating'>
+<!--<p>Your rating:</p>-->
+
+<form method="POST" action="{{ handler_url }}">
+             {{ form.csrf_token }} <!-- Need to include this token - Flask WTForms requires it. -->
+            <div class="form-field"> {{ form.number }} {{form.review(placeholder="Review")}}
+
+            </div>
+            {{ form.submit }}
+        </form>
+</div>
+<div class="rating_right">
+
+    The Rating:{{movie.rating}}
+
+
+</div>
+{% endblock %}

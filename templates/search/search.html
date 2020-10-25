@@ -4,7 +4,7 @@
 {%for movie in movie_list %}
     <div class="col mb-4">
     <div class="card h-100">
-      <a href = "{{ url_for('home_bp.video') }}" ><img class="card-img-top" src="{{ url_for('static', filename='image/movie14.jpeg') }}" alt="..."/></a>
+      <a href = "{{ url_for('home_bp.video',movie=movie.title) }}" ><img class="card-img-top" src="{{ url_for('static', filename='image/movie14.jpeg') }}" alt="..."/></a>
       <div class="card-body">
         <h5 class="card-title">{{movie.title}} {{movie.release_year}}</h5>
         <p class="card-text">{{movie.description}}</p>
@@ -18,8 +18,8 @@
   <br />
 <!--<p>{{family_list}} </p>-->
 <!--  <p>-->
-<!--&lt;!&ndash;    {%for family in family_list %}&ndash;&gt;-->
-<!--&lt;!&ndash;    <p>{{family}} </p>&ndash;&gt;-->
+<!--&lt;!&ndash;    {%for search in family_list %}&ndash;&gt;-->
+<!--&lt;!&ndash;    <p>{{search}} </p>&ndash;&gt;-->
 
 <!--&lt;!&ndash;    {%endfor%}&ndash;&gt;-->
 <!--  </p>-->

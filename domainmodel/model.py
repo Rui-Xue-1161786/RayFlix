@@ -116,7 +116,8 @@ class Movie:
             self.__title = None
         else:
             self.__title = title.strip()
-
+        self.__rating: float = 0.0
+        self._rating_count = 0
         self.__id: int = id
         self.__image_url = None
         self.__description = None
@@ -128,12 +129,26 @@ class Movie:
     # essential attributes
 
     @property
+    def rating(self) -> int:
+        return self.__rating
+
+    @rating.setter
+    def rating(self, number):
+        new_total = self.rating * self._rating_count + number
+        self._rating_count += 1
+        self.__rating = round((new_total) / float(self._rating_count), 1)
+
+    @property
+    def rating_count(self) -> int:
+        return self._rating_count
+
+    @property
     def id(self) -> int:
         return self.__id
 
     @property
     def review(self):
-        return iter(self.__review)
+        return self.__review
 
     @property
     def image_url(self) -> str:
@@ -193,6 +208,12 @@ class Movie:
     @property
     def actors(self) -> list:
         return self.__actors
+
+    def __change_rating__(self, rating_number, number_of_cutting_count):
+        if type(rating_number) == float and 0 < rating_number < 11:
+            self._rating = rating_number
+            if number_of_cutting_count <= self._rating_count and type(number_of_cutting_count) == int:
+                self._rating_count -= number_of_cutting_count
 
     def add_actor(self, actor: Actor):
         if not isinstance(actor, Actor) or actor in self.__actors:

@@ -45,7 +45,10 @@ class MemoryRepository(AbstractRepository):
         self._genre.add(genre)
 
     def get_genre(self) -> List[Genre]:
-        return self._genre
+        genre_names = []
+        for genre in self._genre:
+            genre_names.append(genre.genre_name)
+        return genre_names
 
     def get_movie_ids_for_genre(self, genre_name: str):
         # Linear search, to find the first occurrence of a Tag with the name tag_name.
@@ -59,6 +62,10 @@ class MemoryRepository(AbstractRepository):
 
     def add_review(self, review: Review):
         self._review.append(review)
+        for movie in self._movie:
+            if movie == review.movie:
+                movie.rating = float(review.rating)
+                movie.add_review(review)
 
     def get_review(self):
         return self._review
@@ -95,6 +102,18 @@ class MemoryRepository(AbstractRepository):
         for movie in self._movie:
             if title == movie.title:
                 movie_list.append(movie)
+
+        try:
+            for movie in self._movie:
+                for actor in movie.actors:
+                    if title == actor.actor_full_name:
+                        movie_list.append(movie)
+                if title == movie.director.director_full_name:
+                    movie_list.append(movie)
+                if len(movie_list) == 2:
+                    break
+        except:
+            pass
         return movie_list
         # return next((the_movie for the_movie in self._movie if
         #              the_movie.title == title), None)
@@ -106,7 +125,7 @@ class MemoryRepository(AbstractRepository):
 # filename = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
 # repo = MemoryRepository(filename)
 #
-# movie = repo.get_movie_by_name("The Host")
+# movie = repo.get_movie_by_name("Damien Chazelle")
 # print(movie)
 #
 #

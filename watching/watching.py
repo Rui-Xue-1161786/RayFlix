@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import request, render_template, redirect, url_for, session
 import random
-
+import utilities.utilities as utilities
 from better_profanity import profanity
 from flask_wtf import FlaskForm
 from wtforms import TextAreaField, HiddenField, SubmitField
@@ -84,7 +84,7 @@ def movies_by_tag():
 
     # Generate the webpage to display the articles.
     return render_template(
-        'news/articles.html',
+        'watching/watching.html',
         title='Movies',
         movie_title='Movies tagged by ' + tag_name,
         movies=movies,
@@ -96,5 +96,6 @@ def movies_by_tag():
         last_article_url=last_article_url,
         prev_article_url=prev_article_url,
         next_article_url=next_article_url,
+        tag_urls=utilities.get_tags_and_urls()
         # show_comments_for_article=article_to_show_comments
     )
