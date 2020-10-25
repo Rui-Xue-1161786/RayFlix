@@ -11,13 +11,13 @@
 
   <h1 style="color:red" class = 'rating'>
 
-{% with messages = get_flashed_messages() %}
-        {% if messages%}
-            {% for msg in messages %}
-                {{msg}}
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
+<!--{% with messages = get_flashed_messages() %}-->
+<!--        {% if messages%}-->
+<!--            {% for msg in messages %}-->
+<!--                {{msg}}-->
+<!--            {% endfor %}-->
+<!--        {% endif %}-->
+<!--        {% endwith %}-->
 
 </h1>
 <div class="rating_right">
@@ -25,13 +25,14 @@
     The Rating:{{movie.rating}}
     <h1>
 
+
  <div class = "review">
-<h3>Users review:</h3>
-<h6>
+<h2>Users review:</h2>
+
 {% for review in movie.review%}
     <p>{{review.review_text}}</p>
 {%endfor%}
-    </h6>
+
 </div>
 
 

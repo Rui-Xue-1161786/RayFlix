@@ -9,6 +9,25 @@
   Your browser does not support the video tag.
 </video>
 
+
+ <div class = "review">
+<h2>Users review:</h2>
+
+{% for review in movie.review%}
+    <p>{{review.review_text}}</p>
+{%endfor%}
+
+</div>
+
+<!--<h1 class = "review">-->
+<!--<h3>Users review:</h3>-->
+<!--<h6>-->
+<!--{% for review in movie.review%}-->
+<!--    <p>{{review.review_text}}</p>-->
+<!--{%endfor%}-->
+<!--    </h6>-->
+<!--</h1>-->
+
 <div class = 'rating'>
 <!--<p>Your rating:</p>-->
 
@@ -20,10 +39,13 @@
             {{ form.submit }}
         </form>
 </div>
+
 <div class="rating_right">
 
     The Rating:{{movie.rating}}
 
 
 </div>
+
+
 {% endblock %}

@@ -93,7 +93,7 @@ def video(movie):
                 repo.repo_instance.add_review(review)
 
                 # All is well, redirect the user to the login page.
-                flash('Successful Rating !')
+                # flash('Successful Rating !')
                 # return redirect(url_for('home_bp.video',movie=movie))
                 return render_template(
                     'video/video.html',
