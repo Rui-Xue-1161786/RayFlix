@@ -11,10 +11,12 @@ from werkzeug.security import generate_password_hash
 
 from sqlalchemy.orm import scoped_session
 from flask import _app_ctx_stack
+
 from domainmodel.model import User, Movie, Genre, Director, Review, Actor
 from datafilereaders.repository import AbstractRepository
 
 tags = None
+actors = None
 
 
 class SessionContextManager:
@@ -59,9 +61,10 @@ class SqlAlchemyRepository(AbstractRepository):
     def get_user(self, username) -> User:
         user = None
         try:
-            print('lets go')
-            user = self._session_cm.session.query(User).filter_by(_User__username=username).one()
 
+            user = self._session_cm.session.query(User).filter_by(_User__username=username).one()
+            print("user!!!!!!!!")
+            print(user)
         except NoResultFound:
             # Ignore any exception and return None.
             pass
@@ -81,7 +84,10 @@ class SqlAlchemyRepository(AbstractRepository):
 
     def get_genre(self) -> List[Genre]:
         genres = self._session_cm.session.query(Genre).all()
-        return genres
+        tag_names = []
+        for genre in genres:
+            tag_names.append(genre.genre_name)
+        return tag_names
 
     def add_review(self, review: Review):
         super().add_review(review)
@@ -107,7 +113,7 @@ class SqlAlchemyRepository(AbstractRepository):
     def get_movie(self, movie: str) -> Movie:
         movie = None
         try:
-            movie = self._session_cm.session.query(Movie).filter(Movie.id == id).one()
+            movie = self._session_cm.session.query(Movie).filter_by(_Movie__title=movie).one()
         except NoResultFound:
             # Ignore any exception and return None.
             pass
@@ -116,7 +122,7 @@ class SqlAlchemyRepository(AbstractRepository):
 
     def get_number_of_movies(self):
         print('get number of movies count')
-        number_of_movies = self._session_cm.session.query(Movie).filter(Movie.id == 1).count()
+        number_of_movies = self._session_cm.session.query(Movie).count()
         return number_of_movies
 
     def get_all_movie(self):
@@ -126,14 +132,14 @@ class SqlAlchemyRepository(AbstractRepository):
 
     def get_movie_by_id(self, id: int):
         print(' get movie by id')
-        movie = self._session_cm.session.query(Movie).filter(Movie.id == id).one()
+        movie = self._session_cm.session.query(Movie).filter_by(_Movie__id=id).one()
         return movie
 
     def get_movie_ids_for_genre(self, genre_name: str):
         movie_ids = []
 
         # Use native SQL to retrieve article ids, since there is no mapped class for the article_tags table.
-        row = self._session_cm.session.execute('SELECT id FROM tags WHERE name = :tag_name',
+        row = self._session_cm.session.execute('SELECT id FROM tags WHERE genre_name = :tag_name',
                                                {'tag_name': genre_name}).fetchone()
 
         if row is None:
@@ -152,12 +158,51 @@ class SqlAlchemyRepository(AbstractRepository):
         return movie_ids
 
     def get_movie_list_by_id_list(self, id_list):
-        articles = self._session_cm.session.query(Movie).filter(Movie.id.in_(id_list)).all()
-        return articles
+        name_list = []
+        # user = self._session_cm.session.query(User).filter_by(_User__username=username).one()
+        for id in id_list:
+            movie = self._session_cm.session.query(Movie).filter_by(_Movie__id=id).one()
+            name_list.append(movie)
+        return name_list
 
     def get_movie_by_name(self, title: str):
-        movie = self._session_cm.session.query(Movie).filter(Movie.title == title).one()
-        return movie
+        movie_list = []
+        try:
+            movies = self._session_cm.session.query(Movie).filter_by(_Movie__title=title).all()
+            for movie in movies:
+                movie_list.append(movie)
+        except:
+            pass
+        try:
+            movies = self._session_cm.session.query(Movie).filter_by(_Movie__director_full_name=title).all()
+            for movie in movies:
+                movie_list.append(movie)
+        except:
+            pass
+
+        try:
+            row = self._session_cm.session.execute('SELECT id FROM Actors WHERE actor_full_name = :actor_name',
+                                                   {'actor_name': title}).fetchone()
+            if row is None:
+                # No tag with the name tag_name - create an empty list.
+                movie_ids = list()
+            else:
+                actor_id = row[0]
+
+                # Retrieve article ids of articles associated with the tag.
+                movie_ids = self._session_cm.session.execute(
+                    'SELECT movie_id FROM movie_actors WHERE actor_id = :actor_id ORDER BY movie_id ASC',
+                    {'actor_id': actor_id}
+                ).fetchall()
+                movie_ids = [id[0] for id in movie_ids]
+                for movie_id in movie_ids:
+                    movies = self._session_cm.session.query(Movie).filter_by(_Movie__id=movie_id).all()
+                    for movie in movies:
+                        movie_list.append(movie)
+        except:
+            pass
+
+        return movie_list
 
     def get_director_list(self):
         pass
@@ -186,12 +231,20 @@ def movie_record_generator(filename: str):
             movie_data.append(int(row['Year']))
             movie_data.append(row['Title'])
             movie_data.append(row['Description'])
+            movie_data.append(row['Director'])
 
             movie_tags = row['Genre'].split(',')
             for tag in movie_tags:
                 if tag not in tags.keys():
                     tags[tag] = list()
                 tags[tag].append(movie_id)
+
+            movie_actors = row['Actors'].split(',')
+            for actor in movie_actors:
+                actor = actor.strip()
+                if actor not in actors.keys():
+                    actors[actor] = list()
+                actors[actor].append(movie_id)
 
             yield movie_data
 
@@ -206,6 +259,16 @@ def get_tag_records():
     return tag_records
 
 
+def get_actor_records():
+    actor_records = list()
+    actor_key = 0
+
+    for actor in actors.keys():
+        actor_key = actor_key + 1
+        actor_records.append((actor_key, actor))
+    return actor_records
+
+
 def movie_tags_generator():
     movie_tags_key = 0
     tag_key = 0
@@ -215,6 +278,17 @@ def movie_tags_generator():
         for movie_key in tags[tag]:
             movie_tags_key = movie_tags_key + 1
             yield movie_tags_key, movie_key, tag_key
+
+
+def movie_actors_generator():
+    movie_actors_key = 0
+    actor_key = 0
+
+    for actor in actors.keys():
+        actor_key = actor_key + 1
+        for movie_key in actors[actor]:
+            movie_actors_key = movie_actors_key + 1
+            yield movie_actors_key, movie_key, actor_key
 
 
 # def generic_generator(filename, post_process=None):
@@ -246,10 +320,13 @@ def populate(engine: Engine, data_path: str):
     global tags
     tags = dict()
 
+    global actors
+    actors = dict()
+
     insert_movies = """
         INSERT INTO movies (
-        id, release_year, title, description)
-        VALUES (?, ?, ?, ?)"""
+        id, release_year, title, description, director_full_name)
+        VALUES (?, ?, ?, ?, ?)"""
     cursor.executemany(insert_movies, movie_record_generator(data_path))
 
     insert_tags = """
@@ -258,11 +335,23 @@ def populate(engine: Engine, data_path: str):
         VALUES (?, ?)"""
     cursor.executemany(insert_tags, get_tag_records())
 
+    insert_actors = """
+            INSERT INTO actors (
+            id, actor_full_name)
+            VALUES (?, ?)"""
+    cursor.executemany(insert_actors, get_actor_records())
+
     insert_movie_tags = """
         INSERT INTO movie_tags (
         id, movie_id, tag_id)
         VALUES (?, ?, ?)"""
     cursor.executemany(insert_movie_tags, movie_tags_generator())
+
+    insert_movie_actors = """
+            INSERT INTO movie_actors (
+            id, movie_id, actor_id)
+            VALUES (?, ?, ?)"""
+    cursor.executemany(insert_movie_actors, movie_actors_generator())
 
     # insert_users = """
     #     INSERT INTO users (
@@ -278,4 +367,3 @@ def populate(engine: Engine, data_path: str):
 
     conn.commit()
     conn.close()
-

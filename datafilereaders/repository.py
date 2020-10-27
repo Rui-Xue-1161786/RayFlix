@@ -102,4 +102,6 @@ class AbstractRepository(abc.ABC):
     def get_director_list(self):
         raise NotImplementedError
 
-
+    @abc.abstractmethod
+    def get_movie_by_id(self):
+        raise NotImplementedError

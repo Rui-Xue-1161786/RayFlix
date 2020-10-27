@@ -53,6 +53,9 @@ def home():
     for i in range(len(random_list)):
         movie_name_list.append('image/movie' + str(random_list[i]) + '.jpeg')
     the_movie_name_list = repo.repo_instance.get_movie_list_by_id_list(my_movie_id_list)
+    a = repo.repo_instance.get_movie_by_id(10)
+    print('test get movie by id')
+    print(a)
     length_of_movies = 8
     return render_template(
         'home/home.html',
