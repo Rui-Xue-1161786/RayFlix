@@ -71,8 +71,7 @@ def movies_by_tag():
     if cursor + movies_per_page * 2 < len(movies_ids):
         # There are further articles, so generate URLs for the 'next' and 'last' navigation buttons.
         next_article_url = url_for('watching_bp.movies_by_tag', tag=tag_name, cursor=cursor + movies_per_page)
-
-        last_cursor = (movies_per_page * int(len(movies_ids) / movies_per_page))-movies_per_page
+        last_cursor = (movies_per_page * int(len(movies_ids) / movies_per_page))
         if len(movies_ids) % movies_per_page == 0:
             last_cursor -= movies_per_page
         last_article_url = url_for('watching_bp.movies_by_tag', tag=tag_name, cursor=last_cursor)
