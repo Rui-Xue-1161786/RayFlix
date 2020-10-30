@@ -2,7 +2,7 @@
 
 <html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="width=device-width; charset=utf-8" />
 
     <title>Title</title>
 
@@ -33,6 +33,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ url_for('authentication_bp.register') }}">Register</a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" href="{{ url_for('authentication_bp.login') }}">Login</a>
       </li>
@@ -50,28 +51,15 @@
         </div>
       </li>
 
-
-
-
     </ul>
 
-
-
-
-<!--      <div class="card">-->
-
-<!--        <form class="form-inline my-2 my-lg-0">-->
-<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--        </form>-->
-<!--     </div>-->
 </nav>
 
 
 
   <h1>
-<div class="title_center">
-    Rayflix
+<div>
+    <a class="title_center"class="navbar-brand" href="{{ url_for('home_bp.home') }}">Rayfilx</a>
   </div>
   </h1>
 <body>

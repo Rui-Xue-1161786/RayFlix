@@ -67,8 +67,9 @@ class MemoryRepository(AbstractRepository):
                 movie.rating = float(review.rating)
                 movie.add_review(review)
 
-    def get_review(self):
-        return self._review
+    def get_review(self,movie: Movie):
+        return movie.review
+
 
     def add_movie(self, movie: Movie):
         self._movie.append(movie)

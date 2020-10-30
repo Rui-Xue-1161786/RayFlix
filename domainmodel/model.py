@@ -1,5 +1,4 @@
-from datetime import datetime
-
+from datetime import date
 from domainmodel.classes_in_model.review import Review
 
 
@@ -117,7 +116,7 @@ class Movie:
         else:
             self.__title = title.strip()
         self.__rating: float = 0.0
-        self._rating_count = 0
+        self.__rating_count = 0
         self.__id: int = id
         self.__image_url = None
         self.__description = None
@@ -128,19 +127,25 @@ class Movie:
         self.__review = list()
     # essential attributes
 
+
+
     @property
     def rating(self) -> int:
         return self.__rating
 
     @rating.setter
-    def rating(self, number):
-        new_total = self.rating * self._rating_count + number
-        self._rating_count += 1
-        self.__rating = round((new_total) / float(self._rating_count), 1)
+    def rating(self, number: float):
+        new_total = self.rating * self.rating_count + number
+        print('new tital')
+        print(new_total)
+        self.__rating_count += 1
+        self.__rating = round((new_total) / float(self.rating_count), 1)
+        print('finall check')
+        print(self.__rating)
 
     @property
     def rating_count(self) -> int:
-        return self._rating_count
+        return self.__rating_count
 
     @property
     def id(self) -> int:
@@ -164,7 +169,7 @@ class Movie:
 
     @title.setter
     def title(self, title: str):
-        self.__title
+        self.__title = title
 
     @id.setter
     def id(self, id: str):
@@ -298,7 +303,26 @@ class Review:
             self.__rating = rating
         else:
             self.__rating = None
-        self.__timestamp = datetime.now()
+        self.__timestamp = date.today()
+        self.__user = None
+        self.__movie_id = None
+
+    @property
+    def user(self):
+        return self.__user
+
+    @user.setter
+    def user(self, username: str):
+        self.__user = username
+
+    @property
+    def movie_id(self):
+        return self.__movie_id
+
+    @movie_id.setter
+    def movie_id(self, id: int):
+        self.__movie_id = id
+
 
     @property
     def movie(self) -> Movie:
@@ -313,7 +337,7 @@ class Review:
         return self.__rating
 
     @property
-    def timestamp(self) -> datetime:
+    def timestamp(self) -> date:
         return self.__timestamp
 
     def __eq__(self, other):
@@ -322,7 +346,7 @@ class Review:
         return other.movie == self.__movie and other.review_text == self.__review_text and other.rating == self.__rating and other.timestamp == self.__timestamp
 
     def __repr__(self):
-        return f'<Review of movie {self.__movie}, rating = {self.__rating}, timestamp = {self.__timestamp}>'
+        return f'<Review of movie {self.__movie_id}, rating = {self.__rating}, timestamp = {self.__timestamp}>'
 
 
 class User:

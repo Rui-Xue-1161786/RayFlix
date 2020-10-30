@@ -29,6 +29,7 @@ def register():
 
             # All is well, redirect the user to the login page.
             flash('Successful Registered, please login !', "info")
+            print('register ??????????????????????')
             return redirect(url_for('authentication_bp.login'))
         except services.NameNotUniqueException:
             username_not_unique = 'Your username is already taken - please supply another'
@@ -68,6 +69,8 @@ def login():
             # Initialise session and redirect the user to the home page.
             session.clear()
             session['username'] = user['username']
+            # session['log_situation'] = 'Logout'
+            # session['log_url'] = 'authentication_bp.logout'
             return redirect(url_for('home_bp.home'))
 
         except services.UnknownUserException:

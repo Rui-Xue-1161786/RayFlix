@@ -10,14 +10,26 @@
 </video>
 
 
- <div class = "review">
-<h2>Users review:</h2>
 
-{% for review in movie.review%}
-    <p>{{review.review_text}}</p>
-{%endfor%}
 
-</div>
+<div class = "review">
+<table>
+  <tr>
+    <th>Comment</th>
+    <th>Rating points</th>
+    <th>Time</th>
+  </tr>
+    {% for review in reviews%}
+  <tr>
+    <td>{{review.review_text}}</td>
+    <td>{{review.rating}}</td>
+    <td>{{review.timestamp}}</td>
+  </tr>
+    {%endfor%}
+</table>
+    </div>
+
+
 
 <!--<h1 class = "review">-->
 <!--<h3>Users review:</h3>-->
@@ -42,7 +54,7 @@
 
 <div class="rating_right">
 
-    The Rating:{{movie.rating}}
+    The Rating: {{movie.rating}}
 
 
 </div>

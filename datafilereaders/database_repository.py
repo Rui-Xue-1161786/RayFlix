@@ -90,13 +90,24 @@ class SqlAlchemyRepository(AbstractRepository):
         return tag_names
 
     def add_review(self, review: Review):
-        super().add_review(review)
+        # super().add_review(review)
+        movie = review.movie
+        id = movie.id
+        review.movie_id = id
         with self._session_cm as scm:
             scm.session.add(review)
             scm.commit()
 
-    def get_review(self):
-        reviews = self._session_cm.session.query(Review).all()
+    def get_review(self,movie: Movie):
+        # reviews = self._session_cm.session.query(Review).all()
+        id = movie.id
+        # result = self._session_cm.session.execute(
+        #     'SELECT id FROM movies WHERE id = id',
+        #     {'id': id}
+        # )
+        # movie_id = result.first()[0]
+        # movies = self._session_cm.session.query(Movie).filter_by(_Movie__title=title).all()
+        reviews = self._session_cm.session.query(Review).filter_by(_Review__movie_id=id).all()
         return reviews
 
     def add_director(self, director: Director):
@@ -232,7 +243,8 @@ def movie_record_generator(filename: str):
             movie_data.append(row['Title'])
             movie_data.append(row['Description'])
             movie_data.append(row['Director'])
-
+            movie_data.append(row['Rating'])
+            movie_data.append(1)
             movie_tags = row['Genre'].split(',')
             for tag in movie_tags:
                 if tag not in tags.keys():
@@ -323,10 +335,11 @@ def populate(engine: Engine, data_path: str):
     global actors
     actors = dict()
 
+
     insert_movies = """
         INSERT INTO movies (
-        id, release_year, title, description, director_full_name)
-        VALUES (?, ?, ?, ?, ?)"""
+        id, release_year, title, description, director_full_name, rating, rating_count)
+        VALUES (?, ?, ?, ?, ?, ?, ?)"""
     cursor.executemany(insert_movies, movie_record_generator(data_path))
 
     insert_tags = """

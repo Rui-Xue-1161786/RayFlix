@@ -1,4 +1,3 @@
-
 import random
 from flask import Blueprint, render_template, request, url_for, session, flash, redirect
 import datafilereaders.repository as repo
@@ -6,13 +5,14 @@ from authentication.authentication import SearchForm
 from domainmodel.model import Movie, Review
 import utilities.utilities as utilities
 
-
 home_blueprint = Blueprint(
     'home_bp', __name__)
 
 
 @home_blueprint.route('/', methods=['GET', 'POST'])
 def home():
+    # session['log_situation'] = 'Login'
+    # session['log_url'] = 'authentication_bp.login'
     form = SearchForm()
     if form.is_submitted():
         movie_name = request.form['search_information']
@@ -23,7 +23,7 @@ def home():
 
         except:
             pass
-        #find movie by actor
+        # find movie by actor
 
         if len(movies) == 0:
             movies.append(Movie('No Result, Please Try Another Name !', 0))
@@ -32,7 +32,8 @@ def home():
         return render_template(
             'search/search.html',
             movie_list=movies,
-            length_of_movies=length_of_movies
+            length_of_movies=length_of_movies,
+            tag_urls = utilities.get_tags_and_urls()
 
         )
 
@@ -74,41 +75,56 @@ def video(movie):
     # genre_list = repo.repo_instance.get_genre
     try:
         movies = repo.repo_instance.get_movie_by_name(movie)
+        # need to be improved
         my_movie = movies[0]
-        my_movie.rating = 7.5
+        print('why!!!')
+        print(my_movie)
+        # my_movie.rating = 7.5
+        print('why that is wrong')
+
     except:
-        my_movie = Movie('No_Result',0)
+        print('I know you go to here')
+        my_movie = Movie('No_Result', 0)
+        my_movie.id
         my_movie.rating = 7.5
     if "username" in session:
         form = utilities.RatingForm()
-
+        print(my_movie.id)
 
         # Successful POST, i.e. the username and password have passed validation checking.
         # Use the service layer to attempt to add the new user.
         if request.method == 'POST':
 
-                b = 0
-                for i in range(11):
-                    if i == int(form.number.data):
-                        b = i
-                text = form.review.data
-                review = Review(my_movie, text, b)
-                repo.repo_instance.add_review(review)
+            b = 0
+            for i in range(11):
+                if i == int(form.number.data):
+                    b = i
+            text = form.review.data
+            review = Review(my_movie, text, b)
+            username = session['username']
+            review.user = username
+            repo.repo_instance.add_review(review)
+            reviews = repo.repo_instance.get_review(my_movie)
+            my_movie.rating = review.rating
+            # All is well, redirect the user to the login page.
+            # flash('Successful Rating !')
+            # return redirect(url_for('home_bp.video',movie=movie))
+            return render_template(
+                'video/video.html',
+                movie=my_movie,
+                reviews=reviews,
+                tag_urls=utilities.get_tags_and_urls()
+            )
 
-                # All is well, redirect the user to the login page.
-                # flash('Successful Rating !')
-                # return redirect(url_for('home_bp.video',movie=movie))
-                return render_template(
-                    'video/video.html',
-                    movie = my_movie)
-            # except:
-            #     print("faild!!!!!!")
-            #     flash('Something Wrong, please try again !', "info")
+        # except:
+        #     print("faild!!!!!!")
+        #     flash('Something Wrong, please try again !', "info")
 
         return render_template(
             'video/video_with_review.html',
             form=form,
-            movie = my_movie
+            movie=my_movie,
+            tag_urls = utilities.get_tags_and_urls()
         )
 
     return render_template(
