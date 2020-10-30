@@ -48,8 +48,8 @@ def test_repository_for_genre(in_memory_repo):
 
 
 def test_repository_for_review(in_memory_repo):
-    assert len(in_memory_repo.get_review()) == 0
-    movie = in_memory_repo.get_movie('La La Land',2016)
+    movie = in_memory_repo.get_movie('La La Land', 2016)
+    assert len(in_memory_repo.get_review(movie)) == 0
     review = Review(movie,'good',8)
     in_memory_repo.add_review(review)
-    assert len(in_memory_repo.get_review()) == 1
+    assert len(in_memory_repo.get_review(movie)) == 1

@@ -8,8 +8,10 @@ from domainmodel.model import User
 from datafilereaders.orm import metadata, map_model_to_tables
 from datafilereaders.repository import RepositoryException
 from __init__ import create_app
-TEST_DATA_PATH_MEMORY = 'datafiles/Data1000Movies.csv'
-TEST_DATA_PATH_DATABASE = 'datafiles/Data1000Movies.csv'
+
+
+TEST_DATA_PATH_MEMORY = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
+TEST_DATA_PATH_DATABASE = '/Users/rayxue/Downloads/RayFlix-master/datafiles/Data1000Movies.csv'
 TEST_DATABASE_URI_IN_MEMORY = 'sqlite://'
 TEST_DATABASE_URI_FILE = 'sqlite:///rayflix.db'
 

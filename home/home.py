@@ -77,19 +77,15 @@ def video(movie):
         movies = repo.repo_instance.get_movie_by_name(movie)
         # need to be improved
         my_movie = movies[0]
-        print('why!!!')
-        print(my_movie)
-        # my_movie.rating = 7.5
-        print('why that is wrong')
+        my_movie.rating = 7.5
 
     except:
-        print('I know you go to here')
         my_movie = Movie('No_Result', 0)
         my_movie.id
         my_movie.rating = 7.5
     if "username" in session:
         form = utilities.RatingForm()
-        print(my_movie.id)
+
 
         # Successful POST, i.e. the username and password have passed validation checking.
         # Use the service layer to attempt to add the new user.
