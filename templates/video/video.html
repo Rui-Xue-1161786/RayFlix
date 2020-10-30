@@ -3,30 +3,18 @@
 <!--<h1>{{movie}}</h1>-->
 
 <!--<video width="320" height="240" controls>-->
+<div>
 <video class="video" controls>
   <source src="{{ url_for('static', filename='video/video1.mp4') }}" type="video/mp4">
 <!--  <source src="movie.ogg" type="video/ogg">-->
   Your browser does not support the video tag.
 </video>
-
+</div>
   <h1 style="color:red" class = 'rating'>
-
-<!--{% with messages = get_flashed_messages() %}-->
-<!--        {% if messages%}-->
-<!--            {% for msg in messages %}-->
-<!--                {{msg}}-->
-<!--            {% endfor %}-->
-<!--        {% endif %}-->
-<!--        {% endwith %}-->
-
 </h1>
 <div class="rating_right">
-
-    The Rating: {{movie.rating}}
+  The Rating: {{movie.rating}}
     <h1>
-
-
-
 
 
 <div class = "review">
@@ -47,4 +35,5 @@
     {%endfor%}
 </table>
     </div>
+
 {% endblock %}
